@@ -730,11 +730,11 @@ def main():
     R = 10
     a = np.random.rand( N1, N2, N3)
     A = dtensor(a)
-    print A, type(A)
+    print( A, type(A))
     X_approx_ks = nonnegative_tensor_factorization(A, R)
-    print X_approx_ks.U[0]
-    print X_approx_ks.U[1]
-    print X_approx_ks.U[2]
+    print( X_approx_ks.U[0])
+    print( X_approx_ks.U[1])
+    print( X_approx_ks.U[2])
     exit(0)
 
 
@@ -792,13 +792,13 @@ def main():
     # -----------------------------------------------
     X_approx = X_approx_ks.totensor()
     X_err = (X - X_approx).norm() / X.norm()
-    print "Error:", X_err
-    print X_approx
-    print a.shape
-    print b.shape
-    print c.shape 
-    print d.shape
-    print type(d)
+    print( "Error:", X_err)
+    print( X_approx)
+    print( a.shape)
+    print( b.shape)
+    print( c.shape )
+    print( d.shape)
+    print( type(d))
 
 if __name__ == "__main__":
     main()

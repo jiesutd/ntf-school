@@ -2,7 +2,7 @@
 # @Author: Jie Yang
 # @Date:   2018-12-26 09:17:26
 # @Last Modified by:   Jie Yang,     Contact: jieynlp@gmail.com
-# @Last Modified time: 2018-12-26 14:52:36
+# @Last Modified time: 2018-12-26 14:55:57
 from ncp import *
 import numpy as np
 from sktensor import ktensor
@@ -25,11 +25,11 @@ def main(input_numpy_array, decomp_rank = 10):
 	end_time = time.time()
 	time_cost = end_time - start_time
 	# print input_numpy_array
-	print X_approx_ks.U[0].shape 
-	print X_approx_ks.U[1].shape 
-	print X_approx_ks.U[2].shape 
-	print X_err
-	print "%.2fs"%time_cost
+	print(X_approx_ks.U[0].shape) 
+	print( X_approx_ks.U[1].shape )
+	print( X_approx_ks.U[2].shape )
+	print( X_err)
+	print( "%.2fs"%time_cost)
 
 
 
