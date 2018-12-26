@@ -430,7 +430,7 @@ def getGradient(X, F, nWay, r):
 def getProjGradient(X, F, nWay, r):
     pGrad = []
     for k in range(nWay):
-        ways = range(nWay)
+        ways = list(range(nWay))
         ways.remove(k)
         XF = X.uttkrp(F, k)
         # Compute the inner-product matrix
@@ -456,7 +456,7 @@ class anls_asgroup(object):
         # solve NNLS problems for each factor
         for k in range(nWay):
             curWay = orderWays[k]
-            ways = range(nWay)
+            ways = list(range(nWay))
             ways.remove(curWay)
             XF = X.uttkrp(F, curWay)
             # Compute the inner-product matrix
@@ -482,7 +482,7 @@ class anls_bpp(object):
     def iterSolver(self, X, F, FF_init, nWay, r, orderWays):
         for k in range(nWay):
             curWay = orderWays[k]
-            ways = range(nWay)
+            ways = list(range(nWay))
             ways.remove(curWay)
             XF = X.uttkrp(F, curWay)
             # Compute the inner-product matrix
@@ -505,7 +505,7 @@ class mu(object):
         eps = 1e-16
         for k in range(nWay):
             curWay = orderWays[k]
-            ways = range(nWay)
+            ways = list(range(nWay))
             ways.remove(curWay)
             XF = X.uttkrp(F, curWay)
             FF = ones((r, r))
@@ -535,7 +535,7 @@ class hals(object):
         d = np.sum(F[orderWays[-1]]**2, axis=0)
         for k in range(nWay):
             curWay = orderWays[k]
-            ways = range(nWay)
+            ways = list(range(nWay))
             ways.remove(curWay)
             XF = X.uttkrp(F, curWay)
             FF = ones((r, r))
