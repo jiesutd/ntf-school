@@ -39,6 +39,7 @@ from numpy import zeros, ones, diff, kron, tile, any, all, linalg
 import numpy.linalg as nla
 import time
 from sktensor import ktensor
+from sktensor.dtensor import dtensor
 
 
 def find(condition):
@@ -71,7 +72,7 @@ def normalEqComb(AtA, AtB, PassSet=None):
     """
     if AtB.size == 0:
         Z = np.zeros([])
-    elif (PassSet == None) or np.all(PassSet):
+    elif (PassSet is None) or np.all(PassSet):
         Z = solve(AtA, AtB)
     else:
         Z = np.zeros(AtB.shape)
@@ -125,11 +126,11 @@ def column_group_sub(B, i, cols):
         return [cols]
     if i == (B.shape[0] - 1):
         col_trues = cols[vec.nonzero()[0]]
-        col_falses = cols[(-vec).nonzero()[0]]
+        col_falses = cols[(~vec).nonzero()[0]]
         return [col_trues, col_falses]
     else:
         col_trues = cols[vec.nonzero()[0]]
-        col_falses = cols[(-vec).nonzero()[0]]
+        col_falses = cols[(~vec).nonzero()[0]]
         after = column_group_sub(B, i + 1, col_trues)
         after.extend(column_group_sub(B, i + 1, col_falses))
     return after
@@ -727,6 +728,15 @@ def main():
     N4 = 30
 
     R = 10
+    a = np.random.rand( N1, N2, N3)
+    A = dtensor(a)
+    print A, type(A)
+    X_approx_ks = nonnegative_tensor_factorization(A, R)
+    print X_approx_ks.U[0]
+    print X_approx_ks.U[1]
+    print X_approx_ks.U[2]
+    exit(0)
+
 
     # Random initialization
     np.random.seed(42)
@@ -760,6 +770,10 @@ def main():
     # Uncomment only one of the following
     # -----------------------------------------------
     X_approx_ks = nonnegative_tensor_factorization(X, R)
+    a = X_approx_ks.U[0]
+    b = X_approx_ks.U[1]
+    c = X_approx_ks.U[2]
+    d = X_approx_ks.U[3]
 
 #     X_approx_ks = nonnegative_tensor_factorization(X, R,
 #                                                    min_iter=5, max_iter=20)
@@ -779,6 +793,12 @@ def main():
     X_approx = X_approx_ks.totensor()
     X_err = (X - X_approx).norm() / X.norm()
     print "Error:", X_err
+    print X_approx
+    print a.shape
+    print b.shape
+    print c.shape 
+    print d.shape
+    print type(d)
 
 if __name__ == "__main__":
     main()
