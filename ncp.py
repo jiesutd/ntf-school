@@ -416,7 +416,7 @@ def nnlsm_blockpivot(A, B, isInputProd=0, init=None):
 def getGradient(X, F, nWay, r):
     grad = []
     for k in range(nWay):
-        ways = range(nWay)
+        ways = list(range(nWay))
         ways.remove(k)
         XF = X.uttkrp(F, k)
         # Compute the inner-product matrix
